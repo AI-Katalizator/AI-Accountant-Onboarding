@@ -1,0 +1,6 @@
+docreader — часть продукта AI-Accountant-1C.
+Copyright (c) 2026 Виктория (AI-Accountant-1C). Все права защищены.
+Исходный код распространяется только вместе с продуктом AI-Accountant-1C по договору с клиентом.
+
+Файлы в app/sr/ и definitions/ частично взяты из ScanReader (MIT) — см. NOTICE и app/sr/LICENSE.ScanReader;
+на эти части продолжает действовать лицензия MIT.

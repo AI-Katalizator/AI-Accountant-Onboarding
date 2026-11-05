@@ -1,0 +1,16 @@
+{
+  "name": "n8n-nodes-ai-accountant-files",
+  "version": "0.1.0",
+  "description": "Restricted local file operations for AI Accountant n8n workflows",
+  "license": "UNLICENSED",
+  "keywords": [
+    "n8n-community-node-package"
+  ],
+  "main": "index.js",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "nodes/SafeFileMove/SafeFileMove.node.js"
+    ]
+  }
+}

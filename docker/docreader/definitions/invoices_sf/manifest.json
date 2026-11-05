@@ -1,0 +1,27 @@
+{
+  "id": "invoices_sf",
+  "title": "Счёт-фактура (отдельный документ)",
+  "short_title": "Счёт-фактура",
+  "version": "1.0.0",
+  "enabled": true,
+  "order": 6,
+  "tie_priority": 15,
+  "folder": "invoices_sf",
+  "registry_base_name": "registry_invoices_sf",
+  "js_filename": "invoices_sf.js",
+  "js_var": "INVOICES_SF_DATA",
+  "gt_file": "invoices_sf.json",
+  "schema_class": "InvoiceSfDoc",
+  "classifier": {
+    "keywords": [
+      "счет-фактура",
+      "счёт-фактура"
+    ]
+  },
+  "dashboard": {
+    "icon": "🧾",
+    "color": "teal",
+    "badge": "СФ"
+  },
+  "outcome_note": "Счёт-фактура не создаёт поступление: её регистрируют к своему акту или накладной (документу поступления) в 1С."
+}

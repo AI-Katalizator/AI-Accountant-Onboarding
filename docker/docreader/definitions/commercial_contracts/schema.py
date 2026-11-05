@@ -1,0 +1,75 @@
+# -*- coding: utf-8 -*-
+import re
+from typing import Optional, Any
+from pydantic import BaseModel, Field, field_validator
+from app.sr.finance_parser import parse_russian_currency
+from app.sr.fields import OGRNIP_PATTERN, OGRN_PATTERN, ValidatedPartyMixin
+from app.sr.utils import coerce_to_str
+
+
+class PartyInfo(ValidatedPartyMixin):
+    name: str = Field(default="", description="Наименование организации или ФИО контрагента")
+    role: str = Field(default="", description="Роль стороны (Заказчик, Исполнитель, Поставщик, Покупатель, Арендатор и др.)")
+    ogrn: str = Field(default="", description="ОГРН / ОГРНИП")
+    signatory_fio: str = Field(default="", description="ФИО уполномоченного лица / подписанта")
+    signatory_basis: str = Field(default="", description="Основание полномочий (Устав, Доверенность №...)")
+
+    @field_validator("name", "role", "inn", "kpp", "ogrn", "signatory_fio", "signatory_basis", mode="before")
+    @classmethod
+    def clean_strings(cls, v: Any) -> str:
+        return coerce_to_str(v)
+
+    # P1.9: Rule 6 — ОГРН/ОГРНИП имеет фиксированную длину, «не может быть
+    # значением поля» отвергается схемой (пустое значение пропускается).
+    @field_validator("ogrn", mode="after")
+    @classmethod
+    def _check_ogrn(cls, v: str) -> str:
+        if not v.strip():
+            return v
+        if not (re.match(OGRN_PATTERN, v) or re.match(OGRNIP_PATTERN, v)):
+            raise ValueError(
+                f"ОГРН должен содержать 13 цифр (или 15 для ОГРНИП), получено: {v!r}"
+            )
+        return v
+
+
+class ContractFinances(BaseModel):
+    # P0.4: total_rub_no_vat добавлен, иначе money-rule из verification.json
+    # (total_rub = total_rub_no_vat + vat_amount_rub, min_components=2) не
+    # набирал двух слагаемых и сверка цены договора никогда не выполнялась.
+    total_rub: Optional[float] = Field(ge=0, default=None, description="Общая цена/сумма договора (руб)")
+    total_rub_no_vat: Optional[float] = Field(ge=0, default=None, description="Цена/сумма договора без НДС (руб)")
+    vat_included: Optional[bool] = Field(default=None, description="Включен ли НДС в сумму (true/false)")
+    vat_rate: str = Field(default="", description="Ставка НДС (20%, 10%, 0%, Без НДС)")
+    vat_amount_rub: Optional[float] = Field(ge=0, default=None, description="Сумма НДС (руб)")
+    currency: str = Field(default="RUB", description="Валюта договора")
+
+    @field_validator("total_rub", "total_rub_no_vat", "vat_amount_rub", mode="before")
+    @classmethod
+    def clean_amounts(cls, v: Any) -> Optional[float]:
+        return parse_russian_currency(v)
+
+    @field_validator("vat_rate", "currency", mode="before")
+    @classmethod
+    def clean_strings(cls, v: Any) -> str:
+        return coerce_to_str(v)
+
+
+class CommercialContractDoc(BaseModel):
+    __test__ = False
+    doc_number: str = Field(default="", description="Номер договора")
+    doc_date: str = Field(default="", description="Дата заключения договора (DD.MM.YYYY)")
+    city: str = Field(default="", description="Город / место заключения")
+    contract_type: str = Field(default="Договор", description="Вид договора (поставка, подряд, аренда, оказание услуг)")
+    claim_subject: str = Field(default="", description="Краткое описание предмета договора")
+    party_one: PartyInfo = Field(default_factory=PartyInfo, description="Сторона 1 (Заказчик/Покупатель)")
+    party_two: PartyInfo = Field(default_factory=PartyInfo, description="Сторона 2 (Исполнитель/Поставщик)")
+    finances: ContractFinances = Field(default_factory=ContractFinances, description="Финансовые условия и цена")
+    term_start: str = Field(default="", description="Дата начала действия договора / оказания услуг")
+    term_end: str = Field(default="", description="Дата окончания действия договора / срок исполнения")
+    has_signature_stamp: bool = Field(default=True, description="Наличие подписей и оттисков печатей")
+
+    @field_validator("doc_number", "doc_date", "city", "contract_type", "claim_subject", "term_start", "term_end", mode="before")
+    @classmethod
+    def clean_strings(cls, v: Any) -> str:
+        return coerce_to_str(v)

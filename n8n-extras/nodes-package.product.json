@@ -1,0 +1,8 @@
+{
+  "name": "installed-nodes",
+  "private": true,
+  "dependencies": {
+    "@prokodo/n8n-nodes-pdf-toolkit": "0.1.2",
+    "n8n-nodes-ai-accountant-files": "file:../local-nodes/n8n-nodes-ai-accountant-files"
+  }
+}

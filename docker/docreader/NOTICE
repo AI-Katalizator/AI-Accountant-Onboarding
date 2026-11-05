@@ -1,0 +1,24 @@
+docreader использует сторонние компоненты. Их лицензии разрешают закрытое коммерческое распространение.
+
+1. ScanReader — https://github.com/Riper21/ScanReader (коммит 8095995, 14.10.2026), лицензия MIT,
+   Copyright (c) 2026 ScanReader Contributors. Полный текст: app/sr/LICENSE.ScanReader.
+   Взято (с изменением путей импорта):
+     app/sr/checksums.py        <- src/scan_reader/verifier/checksums.py   (ИНН, СНИЛС, ОГРН, БИК, счёт)
+     app/sr/finance_parser.py   <- src/scan_reader/core/finance_parser.py  (разбор денежных сумм)
+     app/sr/fields.py           <- src/scan_reader/core/fields.py          (проверки ИНН/КПП в схемах)
+     app/sr/utils.py            <- часть src/scan_reader/core/utils.py     (coerce_to_str, get_logger)
+     definitions/{invoices_upd,acceptance_certificates,commercial_contracts,powers_of_attorney}/
+                                <- src/scan_reader/doc_types/*  (schema.py, prompt.md, classifier_rules.json,
+                                   verification.json, flat_1c.json, manifest.json)
+   PyMuPDF (зависимость ScanReader, AGPL) НЕ используется и не входит в образ.
+
+2. Библиотеки Python (ставятся pip):
+   pdfplumber 0.11.10 — MIT; pdfminer.six — MIT; pypdfium2 5.14.0 — BSD-3-Clause / Apache-2.0
+   (внутри PDFium — BSD-3-Clause, https://pdfium.googlesource.com/pdfium/+/refs/heads/main/LICENSE);
+   Pillow — MIT-CMU (HPND); pydantic / pydantic-core — MIT; charset-normalizer — MIT;
+   cryptography — Apache-2.0 / BSD-3-Clause; cffi — MIT; pycparser — BSD-3-Clause;
+   typing_extensions — PSF-2.0; annotated-types — MIT; typing-inspection — MIT.
+
+3. Модель для сканов (не входит в образ, клиент скачивает сам через Ollama):
+   qwen2.5vl:7b — Apache-2.0 (Alibaba Qwen). Внимание: Qwen2.5-VL-3B — Qwen Research License (некоммерческая),
+   её не использовать. Ollama — MIT.
