@@ -1,0 +1,4 @@
+# Модель для чтения сканов с увеличенным окном (16 тыс. токенов).
+# Создание: ollama pull qwen2.5vl:7b && ollama create qwen2.5vl:7b-16k -f Modelfile.qwen2.5vl-7b-16k
+FROM qwen2.5vl:7b
+PARAMETER num_ctx 16384

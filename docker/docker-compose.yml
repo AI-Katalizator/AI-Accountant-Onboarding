@@ -1,0 +1,59 @@
+# n8n: официальный 2.39.5; xlsx уже в образе; community-ноды — в томе N8N_DATA_DIR на диске.
+# Ollama ставится на машину отдельно. MCP пока не ставим. Секретов в файле нет.
+name: ai-accountant
+
+services:
+  n8n:
+    build:
+      context: ./n8n
+      args:
+        N8N_VERSION: ${N8N_VERSION}
+    image: ai-accountant/n8n:${N8N_VERSION}
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=${TIMEZONE}
+      - TZ=${TIMEZONE}
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - N8N_SECURE_COOKIE=false
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_RUNNERS_ENABLED=true
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - NODES_EXCLUDE=["n8n-nodes-base.executeCommand"]
+      - NODE_FUNCTION_ALLOW_EXTERNAL=@e965/xlsx
+      - N8N_RESTRICT_FILE_ACCESS_TO=/home/node/.n8n-files
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - DOCREADER_URL=http://docreader:8011
+    volumes:
+      - ${N8N_DATA_DIR}:/home/node/.n8n
+      - ${HOST_FILES_DIR}:/home/node/.n8n-files
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - docreader
+
+  docreader:
+    build:
+      context: ./docreader
+      dockerfile: Dockerfile
+    image: ai-accountant/docreader:0.2.0
+    container_name: docreader
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8011:8011"
+    environment:
+      - PORT=8011
+      - FILES_ROOTS=/home/node/.n8n-files
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - VISION_MODEL=${VISION_MODEL}
+      - VISION_NUM_CTX=16384
+      - VISION_DPI=150
+      - VISION_MAX_PAGES=2
+    volumes:
+      - ${HOST_FILES_DIR}:/home/node/.n8n-files:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

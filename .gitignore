@@ -1,0 +1,16 @@
+# Секреты и окружение
+.env
+*.env
+!.env.example
+
+# Данные клиента
+profile.json
+*.local.json
+
+# Логи и мусор
+*.log
+__pycache__/
+*.pyc
+.DS_Store
+._*
+node_modules/

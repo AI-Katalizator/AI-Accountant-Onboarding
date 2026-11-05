@@ -1,0 +1,16 @@
+# Только свободные лицензии (MIT / BSD / Apache-2.0). PyMuPDF НЕ используется.
+pdfplumber==0.11.10        # MIT
+pdfminer.six==20260107     # MIT (зависимость pdfplumber)
+pypdfium2==5.14.0          # BSD-3 / Apache-2.0, PDFium — BSD
+Pillow==12.3.0             # MIT-CMU (HPND)
+pydantic==2.14.1           # MIT
+pydantic_core==2.50.1      # MIT
+charset-normalizer==3.5.2  # MIT
+cryptography==50.0.2       # Apache-2.0 / BSD
+cffi                       # MIT
+pycparser                  # BSD
+typing_extensions          # PSF
+annotated-types            # MIT
+typing-inspection          # MIT
+
+openpyxl>=3.1

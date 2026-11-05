@@ -1,0 +1,45 @@
+{
+  "profile_id": "",
+  "profile_name": "ИИ-бухгалтер — ",
+  "organization": {
+    "name_full": "", "name_display": "", "name_in_1c": "", "aliases": [],
+    "inn": "", "kpp": "", "ogrn": "", "ref_guid": ""
+  },
+  "onec": {
+    "database_name": "",
+    "database_status": "test_copy",
+    "web_publication_url_host": "",
+    "web_publication_url_n8n": "",
+    "odata_base_url": "",
+    "http_credential_name": "1С — AI",
+    "mcp_base_url": "",
+    "mcp_channel": "",
+    "nomenclature_placeholder": { "name": "Оплата по счёту", "ref_guid": "" }
+  },
+  "folders": {
+    "incoming_host": "", "incoming_n8n": "",
+    "task_created_host": "", "task_created_n8n": "",
+    "task_done_host": "", "task_done_n8n": "",
+    "outgoing_host": "", "outgoing_n8n": "",
+    "file_volume_host": "", "file_volume_n8n": "",
+    "inbox_bank_statements_host": "", "inbox_bank_statements_n8n": "",
+    "inbox_supplier_invoices_host": "", "inbox_supplier_invoices_n8n": "",
+    "processed_host": "", "processed_n8n": ""
+  },
+  "task_settings": {
+    "default_executor": { "name": "", "ref_guid": "" },
+    "agent_executors": {},
+    "due_days": 3,
+    "human_executors": { "purchases": { "name": "", "ref_guid": "" } }
+  },
+  "integration_policy": {
+    "read_strategy": "OData",
+    "write_strategy": "HTTP/OData, только черновики (без проведения)",
+    "credentials_are_stored_in_n8n": true
+  },
+  "execution": {
+    "timezone": "Europe/Moscow",
+    "session_policy": { "mode": "multi_user" }
+  },
+  "file_storage": { "mode": "", "volume_name": "", "volume_ref_guid": "" }
+}
