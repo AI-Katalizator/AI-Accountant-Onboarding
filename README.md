@@ -34,11 +34,13 @@ AI-Katalizator — это готовые сценарии обработки в�
 
 ## Как начать установку среды
 
-1. Скачайте пакет: [Download ZIP](https://github.com/AI-Katalizator/AI-Accountant-Onboarding/archive/refs/heads/main.zip) или  
-   `git clone https://github.com/AI-Katalizator/AI-Accountant-Onboarding.git`
-2. Откройте папку в Cursor (или другом ИИ-ассистенте установки).
-3. Скажите: **«Установи по SKILL.md»**.
-4. Подтверждайте шаги; секреты вводите сами в защищённые поля.
+1. Откройте Cursor, Codex или другого ИИ-ассистента установки.
+2. Отправьте ему ссылку на этот репозиторий:  
+   https://github.com/AI-Katalizator/AI-Accountant-Onboarding  
+   и скажите: **«Установи по SKILL.md»**.
+3. Подтверждайте шаги; секреты вводите сами в защищённые поля.
+
+Ассистент сам подтянет пакет и проведёт установку. Скачивать ZIP или клонировать репозиторий вручную не обязательно — это запасной вариант, если с GitHub через ассистента работать неудобно: [Download ZIP](https://github.com/AI-Katalizator/AI-Accountant-Onboarding/archive/refs/heads/main.zip) или `git clone https://github.com/AI-Katalizator/AI-Accountant-Onboarding.git`, затем открыть папку у ассистента и снова: **«Установи по SKILL.md»**.
 
 Не хотите ставить сами — возможна установка под ключ по удалённому доступу к **вашему** контуру (условия — у владельца продукта).
 
