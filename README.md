@@ -46,6 +46,12 @@ AI-Katalizator — это готовые сценарии обработки в�
 
 IT-специалисту: [технические требования](docs/TECHNICAL_REQUIREMENTS.md).
 
+## Инструкции
+
+- [Бухгалтеру](docs/INSTRUCTION_ACCOUNTANT.md) — входящий документ, задача в 1С, непроведённый черновик, проверка и проведение.
+- [ИТ-специалисту клиента](docs/INSTRUCTION_IT_1C.md) — чек-лист подготовки базы 1С. Состав программ и ресурсы — в [технических требованиях](docs/TECHNICAL_REQUIREMENTS.md).
+- [Частые вопросы](docs/TROUBLESHOOTING.md) — проверки Docker, n8n, Ollama, docreader и OData.
+
 ---
 
 ## Что в пакете / чего нет
