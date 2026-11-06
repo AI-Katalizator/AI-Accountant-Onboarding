@@ -50,7 +50,7 @@ IT-специалисту: [технические требования](docs/TE
 
 - [Бухгалтеру](docs/INSTRUCTION_ACCOUNTANT.md) — входящий документ, задача в 1С, непроведённый черновик, проверка и проведение.
 - [ИТ-специалисту клиента](docs/INSTRUCTION_IT_1C.md) — чек-лист подготовки базы 1С. Состав программ и ресурсы — в [технических требованиях](docs/TECHNICAL_REQUIREMENTS.md).
-- [Если не сработало](docs/TROUBLESHOOTING.md) — типичные симптомы и куда обратиться.
+- [Частые вопросы](docs/TROUBLESHOOTING.md) — проверки Docker, n8n, Ollama, docreader и OData.
 
 ---
 
