@@ -12,7 +12,7 @@ from .classify import TYPE_DEF, classify
 from .tables import colnum_table, label_table
 from .util import clean, join_wrapped, vocab_of, money, norm_rate, num
 
-VERSION = "0.2.0"
+VERSION = "0.2.0-dev"
 
 
 def _outcomes():
